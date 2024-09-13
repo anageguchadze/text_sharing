@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Text Sharing</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+
+    <ul>
+        {% for text in texts %}
+            <li>
+                <strong>{{ text.title }}</strong>: {{ text.description }}
+                <a href="{% url 'edit' text.pk %}">Edit</a>
+            </li>
+        {% empty %}
+            <li>No texts available.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
